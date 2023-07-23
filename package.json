@@ -1,6 +1,6 @@
 {
 	"name": "@v1ggs/abstraction-dsl",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Differential serving JavaScript loader for front-end development with Abstraction.",
 	"main": "index.js",
 	"license": "MIT",
