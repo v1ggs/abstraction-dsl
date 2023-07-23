@@ -57,7 +57,7 @@
 	},
 	"scripts": {
 		"developer:husky": "npx husky install && npx husky add .husky/commit-msg \"npx --no -- commitlint --edit ${1}\"",
-		"prerelease": "npx commitlint --from HEAD~1 --to HEAD",
+		"prerelease": "npx commitlint -t HEAD",
 		"release": "dotenv release-it --",
 		"start": "node bin/build.js",
 		"min": "node bin/minify.js",
