@@ -1,10 +1,10 @@
-# DIFFERENTIAL SCRIPTS LOADER
+# Differential Serving Loader
 
 ## INFO
 
-> Problem: When having two transpilation configs for Webpack (i.e. differential serving: `modern/es6` and `legacy/es5`), plugins being used to load javascript into HTML with `html-webpack-plugin` can be used only with one configuration (either `main` or `legacy`). The same stands for the manipulation with `htmlWebpackPlugin.files.js`. Therefore this is the only solution I can find for now.
+> Problem: When having two transpilation configs for Webpack (i.e. differential serving: `modern/es6` and `legacy/es5`), webpack plugins being used to load javascript into HTML, together with `html-webpack-plugin`, can be used only with one configuration (either `main` or `legacy`). The same stands for the manipulation with `htmlWebpackPlugin.files.js`. Therefore this is the only solution I can find for now.
 >
-> IMPORTANT: This is only to be used in development, JavaScripts have to be added manually to HTML in production.
+> IMPORTANT: This is only to be used in development!
 
 This projects creates an `abstraction.dsl.js` (optionally minified) file, which can be loaded into HTML, in order to load produced bundles the "module/nomodule" way.
 
@@ -14,7 +14,20 @@ This way, all produced javascripts are present in the `index.html`, so that the 
 
 Since it has to be supported on all browsers, all required polyfills, including `whatwg-fetch` are bundled, and the file is quite large.
 
-> .assets.json format can be found in the "test" folder.
+`.assets.json` file can be found in the "test" folder. This is the content of the file being used with this setup:
+
+```json
+{
+ "index": {
+  "js": "assets/index.es5.js",
+  "mjs": "assets/index.mjs"
+ },
+ "homepage": {
+  "js": "assets/homepage.es5.js",
+  "mjs": "assets/homepage.mjs"
+ }
+}
+```
 
 ## CONFIG
 
