@@ -43,7 +43,7 @@ You can either install this package or copy/clone this folder somewhere on your 
 
 ```sh
 # Install first
-npm i -D abstraction-dsl
+npm i -D @v1ggs/abstraction-dsl
 
 # Then create a config file and edit it as required.
 
