@@ -1,0 +1,27 @@
+{
+	"extends": [
+		"eslint:recommended",
+		"prettier"
+	],
+	// ESLint lets you configure language options specific to the JavaScript
+	// used in your project, like custom global variables. You can also use
+	// plugins to extend ESLint to support your project’s language options.
+	// An environment provides predefined global variables.
+	// https://eslint.org/docs/latest/user-guide/configuring/language-options
+	"env": {
+		"es2022": true,
+		"jquery": true,
+		"browser": true,
+		"node": true // allows `require()`;
+	},
+	"parserOptions": {
+		// Prevents `Parsing error: 'import' and 'export' may appear only
+		// with 'sourceType: module'`
+		"sourceType": "module",
+		"ecmaVersion": 2022
+	},
+	"ignorePatterns": [
+		"**/node_modules"
+	],
+	"rules": {}
+}

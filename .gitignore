@@ -1,0 +1,7 @@
+.env
+.git
+.husky
+.vscode
+node_modules
+*.tgz
+*.zip

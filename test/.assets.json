@@ -1,0 +1,10 @@
+{
+	"index": {
+		"js": "assets/index.es5.js",
+		"mjs": "assets/index.mjs"
+	},
+	"homepage": {
+		"js": "assets/homepage.es5.js",
+		"mjs": "assets/homepage.mjs"
+	}
+}
