@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/v1ggs/abstraction-dsl/compare/1.0.2...1.0.3) (2023-07-23)
+
+
+### Docs
+
+* fixed title, added .assets.json file's content and some other minor changes in the text ([11f3597](https://github.com/v1ggs/abstraction-dsl/commit/11f35977750ed1e3a7656972fe272089a0458a4c))
+
 ## [1.0.2](https://github.com/v1ggs/abstraction-dsl/compare/1.0.1...1.0.2) (2023-07-23)
 
 
