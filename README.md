@@ -1,5 +1,14 @@
 # Differential Serving Loader
 
+- [Differential Serving Loader](#differential-serving-loader)
+	- [INFO](#info)
+	- [CONFIG](#config)
+	- [USAGE](#usage)
+		- [Install](#install)
+		- [Clone or download](#clone-or-download)
+	- [CHANGELOG](#changelog)
+	- [LICENSE](#license)
+
 ## INFO
 
 > Problem: When having two transpilation configs for Webpack (i.e. differential serving: `modern/es6` and `legacy/es5`), webpack plugins being used to load javascript into HTML, together with `html-webpack-plugin`, can be used only with one configuration (either `main` or `legacy`). The same stands for the manipulation with `htmlWebpackPlugin.files.js`. Therefore this is the only solution I can find for now.
@@ -93,6 +102,10 @@ npm test
 # minify the bundle
 npm run min
 ```
+
+## CHANGELOG
+
+[CHANGELOG](CHANGELOG.md)
 
 ## LICENSE
 
