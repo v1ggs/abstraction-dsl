@@ -6,15 +6,15 @@
 >
 > IMPORTANT: This is only to be used in development!
 
-This projects creates an `abstraction.dsl.js` (optionally minified) file, which can be loaded into HTML, in order to load produced bundles the "module/nomodule" way.
+This projects creates an `abstraction.dsl.js` and `abstraction.dsl.min.js` files. When you include it into HTML, it will load produced bundles the "module/nomodule" way.
 
-It requires the HTML to be run on a server: it `fetch`es `.assets.json` file (built with [assets-webpack-plugin](https://www.npmjs.com/package/assets-webpack-plugin)), to read the information about produced javascript files. Then it loads into HTML all javascript found in the `.json` file. Files with `.mjs` extension will be loaded with `type="module"` and `.js` files with `nomodule defer` attributes.
+HTML has to be run on a server, because it `fetch`es `.assets.json` file (built with [assets-webpack-plugin](https://www.npmjs.com/package/assets-webpack-plugin)), to read the information about produced javascript files. Then it loads all javascript found in the `.json` file. Files with `.mjs` extension will be loaded with `type="module"` and `.js` files with `nomodule defer` attributes.
 
 This way, all produced javascripts are present in the `index.html`, so that the page can be tested on modern and legacy browsers at the same time, during the development.
 
 Since it has to be supported on all browsers, all required polyfills, including `whatwg-fetch` are bundled, and the file is quite large.
 
-`.assets.json` file can be found in the "test" folder. This is the content of the file being used with this setup:
+An example of the `.assets.json` file can be found in the "test" folder. This is the content of the file being used with this setup:
 
 ```json
 {
@@ -50,7 +50,9 @@ module.exports = {
 
 ## USAGE
 
-You can either install this package or copy/clone this folder somewhere on your disk.
+You can take built files from the `test` folder: `abstraction.dsl.js` and `abstraction.dsl.min.js`, and include them in the HTML.
+
+You can also build them yourself: either install this package or clone/download it somewhere on your disk.
 
 ### Install
 
@@ -58,22 +60,19 @@ You can either install this package or copy/clone this folder somewhere on your 
 # Install first
 npm i -D @v1ggs/abstraction-dsl
 
-# Then create a config file and edit it as required.
+# Then create a config file (.abstraction.dsl.config.js)
+# in the root, and edit it as required.
 
-# Build the script
+# Then build the script
 npx bdsl
 
 # Minify the built file
 npx mdsl
 ```
 
-### Copy/clone
+### Clone or download
 
-You can take built files from the `test` folder: `abstraction.dsl.js` and `abstraction.dsl.min.js`, and include them in the HTML.
-
-You can also build them yourself.
-
-First edit config as per your requirements.
+First create and edit config as per your requirements.
 
 Navigate in the console/terminal to this folder.
 
