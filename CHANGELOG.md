@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.4](https://github.com/v1ggs/abstraction-dsl/compare/1.0.3...1.0.4) (2023-07-27)
+
+
+### Docs
+
+* added change log and the table of contents ([dfebf76](https://github.com/v1ggs/abstraction-dsl/commit/dfebf76c328aa83b0c29e673e9c5b415d86c55ea))
+* added more info and a link to abstraction ([8b7c588](https://github.com/v1ggs/abstraction-dsl/commit/8b7c5885a74ea5b78483215507fed6cd6158fdf4))
+* minor changes ([9230519](https://github.com/v1ggs/abstraction-dsl/commit/9230519a6b67d4ab15a47cf20c2502cd4df0d9c4))
+
 ## [1.0.3](https://github.com/v1ggs/abstraction-dsl/compare/1.0.2...1.0.3) (2023-07-23)
 
 
