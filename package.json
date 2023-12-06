@@ -9,11 +9,10 @@
 		"url": "https://igorvracar.com/"
 	},
 	"keywords": [
-		"differential",
-		"serving",
+		"differential serving",
+		"abstraction",
 		"JavaScript",
 		"webpack",
-		"abstraction",
 		"front-end",
 		"development"
 	],
@@ -29,24 +28,24 @@
 		"access": "public"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^17.6.7",
-		"@commitlint/config-conventional": "^17.6.7",
-		"@release-it/conventional-changelog": "^7.0.0",
-		"dotenv-cli": "^7.2.1",
-		"eslint": "^8.45.0",
-		"eslint-config-prettier": "^8.8.0",
+		"@commitlint/cli": "^17.8.1",
+		"@commitlint/config-conventional": "^17.8.1",
+		"@release-it/conventional-changelog": "^7.0.2",
+		"dotenv-cli": "^7.3.0",
+		"eslint": "^8.55.0",
+		"eslint-config-prettier": "^8.10.0",
 		"http-server": "^14.1.1",
 		"husky": "^8.0.3",
-		"prettier": "^3.0.0",
-		"release-it": "^16.1.3"
+		"prettier": "^3.1.0",
+		"release-it": "^16.3.0"
 	},
-	"dependencies": {
-		"@babel/preset-env": "^7.22.9",
+	"optionalDependencies": {
+		"@babel/preset-env": "^7.23.5",
 		"babelify": "^10.0.0",
 		"browserify": "^17.0.0",
-		"core-js": "^3.31.0",
+		"core-js": "^3.34.0",
 		"uglify-js": "^3.17.4",
-		"whatwg-fetch": "^3.6.2"
+		"whatwg-fetch": "^3.6.19"
 	},
 	"engines": {
 		"node": ">=v16"
