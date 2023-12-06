@@ -10,18 +10,22 @@ module.exports = {
       // upfront to prevent "empty" releases. Configure
       // "git.requireCommits": true to exit the release-it process
       // if there are no commits since the latest tag.
-
       requireCommits: true,
    },
 
    github: {
       // https://github.com/release-it/release-it/blob/HEAD/docs/github-releases.md
-      // To automate the release (using the GitHub REST API), the
-      // following needs to be configured:
+      // To automate the release (using the GitHub REST API), the following needs
+      // to be configured:
       // Configure github.release: true
-      // Obtain a personal access token(release- it only needs "repo"
-      // access; no "admin" or other scopes).
+      // Obtain a personal access token
       // Make sure the token is available as an environment variable.
+      // ============================================================================
+      // Create the token at:
+      //  - Settings > Developer Settings > Personal access tokens > Tokens (classic)
+      //  - or: https://github.com/settings/tokens/new
+      // Release- it only needs "repo" access; no "admin" or other scopes).
+      // ============================================================================
       release: true,
    },
 
