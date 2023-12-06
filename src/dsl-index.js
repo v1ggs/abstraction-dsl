@@ -2,7 +2,8 @@
 Plugins that work with `html-webpack-plugin` can be applied only to one
 transpilation (`main` or `legacy`). The same stands for the manipulation
 with `htmlWebpackPlugin.files.js`. Therefore this is the only solution for now.
-JavaScripts have to be added manually to html in production.
+JavaScripts have to be added manually to html in development.
+DON'T USE IN PRODUCTION.
 */
 
 import config from '../.abstraction.dsl.config.defaults.js';
