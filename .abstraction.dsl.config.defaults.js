@@ -6,13 +6,17 @@ let userConfig = {},
    userConfigFile;
 
 const configDefault = {
-   // dist dir name (it's in the root)
+   // dist dir (root-relative)
    dist: 'test',
-   // Url relative to the site root (w/o leading slash):
-   // `assetsJson: 'somedir/.assets.json'` will be loaded from
-   // e.g. `http://localhost:8080/somedir/.assets.json`.
+
+   // This is where this bundle will look for `assetsJson`.
+   // A path, relative to the site root (w/o a leading slash):
+   // e.g. `assetsJson: 'somedir/.assets.json'` will be loaded from
+   // `http://localhost:8080/somedir/.assets.json`.
    assetsJsonUrl: '.assets.json',
-   // If you change this, you have to change it in `test/index.html` as well.
+
+   // Built file's name: if you change this, you have to change it
+   // in `test/index.html` as well.
    fileName: 'abstraction.dsl.js',
 };
 
