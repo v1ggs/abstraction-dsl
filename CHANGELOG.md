@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/v1ggs/abstraction-dsl/compare/1.0.4...1.1.0) (2023-12-06)
+
+
+### Features
+
+* added option to skip installing dependencies when not required, updated packages ([440688f](https://github.com/v1ggs/abstraction-dsl/commit/440688f80c8ede2ad9f778b8fd81516d9c9f2a11))
+
+
+### Docs
+
+* updated readme ([99f43c8](https://github.com/v1ggs/abstraction-dsl/commit/99f43c80063719224c5b710570bd37f13ef52604))
+
 ## [1.0.4](https://github.com/v1ggs/abstraction-dsl/compare/1.0.3...1.0.4) (2023-07-27)
 
 
