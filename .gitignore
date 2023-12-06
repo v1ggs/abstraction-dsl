@@ -3,5 +3,6 @@
 .husky
 .vscode
 node_modules
+TODO.md
 *.tgz
 *.zip
