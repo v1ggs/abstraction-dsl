@@ -10,6 +10,17 @@ import config from '../.abstraction.dsl.config.defaults.js';
 
 import 'whatwg-fetch';
 
+// startsWith polyfill for IE11 (whatwg-fetch)
+// https://stackoverflow.com/a/36213464
+if (!String.prototype.startsWith) {
+   Object.defineProperty(String.prototype, 'startsWith', {
+      value: function (search, rawPos) {
+         var pos = rawPos > 0 ? rawPos | 0 : 0;
+         return this.substring(pos, pos + search.length) === search;
+      },
+   });
+}
+
 const assetsJsonFile = config.assetsJsonUrl;
 
 const appendScript = (url, ext) => {

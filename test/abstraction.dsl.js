@@ -33,7 +33,7 @@ try {
 module.exports = Object.assign(configDefault, userConfig);
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":197,"core-js/modules/es.array.join.js":158,"core-js/modules/es.object.assign.js":168,"path":196}],2:[function(require,module,exports){
+},{"_process":198,"core-js/modules/es.array.join.js":158,"core-js/modules/es.object.assign.js":168,"path":197}],2:[function(require,module,exports){
 'use strict';
 var isCallable = require('../internals/is-callable');
 var tryToString = require('../internals/try-to-string');
@@ -4239,13 +4239,51 @@ defineIterator(String, 'String', function (iterated) {
 
 },{"../internals/create-iter-result-object":24,"../internals/internal-state":75,"../internals/iterator-define":89,"../internals/string-multibyte":131,"../internals/to-string":144}],186:[function(require,module,exports){
 'use strict';
+var $ = require('../internals/export');
+var uncurryThis = require('../internals/function-uncurry-this-clause');
+var getOwnPropertyDescriptor = require('../internals/object-get-own-property-descriptor').f;
+var toLength = require('../internals/to-length');
+var toString = require('../internals/to-string');
+var notARegExp = require('../internals/not-a-regexp');
+var requireObjectCoercible = require('../internals/require-object-coercible');
+var correctIsRegExpLogic = require('../internals/correct-is-regexp-logic');
+var IS_PURE = require('../internals/is-pure');
+
+// eslint-disable-next-line es/no-string-prototype-startswith -- safe
+var nativeStartsWith = uncurryThis(''.startsWith);
+var stringSlice = uncurryThis(''.slice);
+var min = Math.min;
+
+var CORRECT_IS_REGEXP_LOGIC = correctIsRegExpLogic('startsWith');
+// https://github.com/zloirock/core-js/pull/702
+var MDN_POLYFILL_BUG = !IS_PURE && !CORRECT_IS_REGEXP_LOGIC && !!function () {
+  var descriptor = getOwnPropertyDescriptor(String.prototype, 'startsWith');
+  return descriptor && !descriptor.writable;
+}();
+
+// `String.prototype.startsWith` method
+// https://tc39.es/ecma262/#sec-string.prototype.startswith
+$({ target: 'String', proto: true, forced: !MDN_POLYFILL_BUG && !CORRECT_IS_REGEXP_LOGIC }, {
+  startsWith: function startsWith(searchString /* , position = 0 */) {
+    var that = toString(requireObjectCoercible(this));
+    notARegExp(searchString);
+    var index = toLength(min(arguments.length > 1 ? arguments[1] : undefined, that.length));
+    var search = toString(searchString);
+    return nativeStartsWith
+      ? nativeStartsWith(that, search, index)
+      : stringSlice(that, index, index + search.length) === search;
+  }
+});
+
+},{"../internals/correct-is-regexp-logic":22,"../internals/export":50,"../internals/function-uncurry-this-clause":58,"../internals/is-pure":83,"../internals/not-a-regexp":98,"../internals/object-get-own-property-descriptor":103,"../internals/require-object-coercible":124,"../internals/to-length":139,"../internals/to-string":144}],187:[function(require,module,exports){
+'use strict';
 var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
 
 // `Symbol.asyncIterator` well-known symbol
 // https://tc39.es/ecma262/#sec-symbol.asynciterator
 defineWellKnownSymbol('asyncIterator');
 
-},{"../internals/well-known-symbol-define":151}],187:[function(require,module,exports){
+},{"../internals/well-known-symbol-define":151}],188:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var global = require('../internals/global');
@@ -4510,7 +4548,7 @@ setToStringTag($Symbol, SYMBOL);
 
 hiddenKeys[HIDDEN] = true;
 
-},{"../internals/an-object":7,"../internals/array-iteration":10,"../internals/create-property-descriptor":26,"../internals/define-built-in":29,"../internals/define-built-in-accessor":28,"../internals/descriptors":31,"../internals/export":50,"../internals/fails":51,"../internals/function-call":55,"../internals/function-uncurry-this":59,"../internals/global":65,"../internals/has-own-property":66,"../internals/hidden-keys":67,"../internals/internal-state":75,"../internals/is-pure":83,"../internals/object-create":100,"../internals/object-define-properties":101,"../internals/object-define-property":102,"../internals/object-get-own-property-descriptor":103,"../internals/object-get-own-property-names":105,"../internals/object-get-own-property-names-external":104,"../internals/object-get-own-property-symbols":106,"../internals/object-is-prototype-of":108,"../internals/object-keys":110,"../internals/object-property-is-enumerable":111,"../internals/set-to-string-tag":126,"../internals/shared":129,"../internals/shared-key":127,"../internals/symbol-constructor-detection":132,"../internals/symbol-define-to-primitive":133,"../internals/to-indexed-object":137,"../internals/to-property-key":142,"../internals/to-string":144,"../internals/uid":146,"../internals/well-known-symbol":153,"../internals/well-known-symbol-define":151,"../internals/well-known-symbol-wrapped":152}],188:[function(require,module,exports){
+},{"../internals/an-object":7,"../internals/array-iteration":10,"../internals/create-property-descriptor":26,"../internals/define-built-in":29,"../internals/define-built-in-accessor":28,"../internals/descriptors":31,"../internals/export":50,"../internals/fails":51,"../internals/function-call":55,"../internals/function-uncurry-this":59,"../internals/global":65,"../internals/has-own-property":66,"../internals/hidden-keys":67,"../internals/internal-state":75,"../internals/is-pure":83,"../internals/object-create":100,"../internals/object-define-properties":101,"../internals/object-define-property":102,"../internals/object-get-own-property-descriptor":103,"../internals/object-get-own-property-names":105,"../internals/object-get-own-property-names-external":104,"../internals/object-get-own-property-symbols":106,"../internals/object-is-prototype-of":108,"../internals/object-keys":110,"../internals/object-property-is-enumerable":111,"../internals/set-to-string-tag":126,"../internals/shared":129,"../internals/shared-key":127,"../internals/symbol-constructor-detection":132,"../internals/symbol-define-to-primitive":133,"../internals/to-indexed-object":137,"../internals/to-property-key":142,"../internals/to-string":144,"../internals/uid":146,"../internals/well-known-symbol":153,"../internals/well-known-symbol-define":151,"../internals/well-known-symbol-wrapped":152}],189:[function(require,module,exports){
 // `Symbol.prototype.description` getter
 // https://tc39.es/ecma262/#sec-symbol.prototype.description
 'use strict';
@@ -4571,7 +4609,7 @@ if (DESCRIPTORS && isCallable(NativeSymbol) && (!('description' in SymbolPrototy
   });
 }
 
-},{"../internals/copy-constructor-properties":21,"../internals/define-built-in-accessor":28,"../internals/descriptors":31,"../internals/export":50,"../internals/function-uncurry-this":59,"../internals/global":65,"../internals/has-own-property":66,"../internals/is-callable":78,"../internals/object-is-prototype-of":108,"../internals/to-string":144}],189:[function(require,module,exports){
+},{"../internals/copy-constructor-properties":21,"../internals/define-built-in-accessor":28,"../internals/descriptors":31,"../internals/export":50,"../internals/function-uncurry-this":59,"../internals/global":65,"../internals/has-own-property":66,"../internals/is-callable":78,"../internals/object-is-prototype-of":108,"../internals/to-string":144}],190:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var getBuiltIn = require('../internals/get-built-in');
@@ -4596,7 +4634,7 @@ $({ target: 'Symbol', stat: true, forced: !NATIVE_SYMBOL_REGISTRY }, {
   }
 });
 
-},{"../internals/export":50,"../internals/get-built-in":60,"../internals/has-own-property":66,"../internals/shared":129,"../internals/symbol-registry-detection":134,"../internals/to-string":144}],190:[function(require,module,exports){
+},{"../internals/export":50,"../internals/get-built-in":60,"../internals/has-own-property":66,"../internals/shared":129,"../internals/symbol-registry-detection":134,"../internals/to-string":144}],191:[function(require,module,exports){
 'use strict';
 var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
 
@@ -4604,7 +4642,7 @@ var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
 // https://tc39.es/ecma262/#sec-symbol.iterator
 defineWellKnownSymbol('iterator');
 
-},{"../internals/well-known-symbol-define":151}],191:[function(require,module,exports){
+},{"../internals/well-known-symbol-define":151}],192:[function(require,module,exports){
 'use strict';
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require('../modules/es.symbol.constructor');
@@ -4613,7 +4651,7 @@ require('../modules/es.symbol.key-for');
 require('../modules/es.json.stringify');
 require('../modules/es.object.get-own-property-symbols');
 
-},{"../modules/es.json.stringify":165,"../modules/es.object.get-own-property-symbols":171,"../modules/es.symbol.constructor":187,"../modules/es.symbol.for":189,"../modules/es.symbol.key-for":192}],192:[function(require,module,exports){
+},{"../modules/es.json.stringify":165,"../modules/es.object.get-own-property-symbols":171,"../modules/es.symbol.constructor":188,"../modules/es.symbol.for":190,"../modules/es.symbol.key-for":193}],193:[function(require,module,exports){
 'use strict';
 var $ = require('../internals/export');
 var hasOwn = require('../internals/has-own-property');
@@ -4633,7 +4671,7 @@ $({ target: 'Symbol', stat: true, forced: !NATIVE_SYMBOL_REGISTRY }, {
   }
 });
 
-},{"../internals/export":50,"../internals/has-own-property":66,"../internals/is-symbol":85,"../internals/shared":129,"../internals/symbol-registry-detection":134,"../internals/try-to-string":145}],193:[function(require,module,exports){
+},{"../internals/export":50,"../internals/has-own-property":66,"../internals/is-symbol":85,"../internals/shared":129,"../internals/symbol-registry-detection":134,"../internals/try-to-string":145}],194:[function(require,module,exports){
 'use strict';
 var getBuiltIn = require('../internals/get-built-in');
 var defineWellKnownSymbol = require('../internals/well-known-symbol-define');
@@ -4647,7 +4685,7 @@ defineWellKnownSymbol('toStringTag');
 // https://tc39.es/ecma262/#sec-symbol.prototype-@@tostringtag
 setToStringTag(getBuiltIn('Symbol'), 'Symbol');
 
-},{"../internals/get-built-in":60,"../internals/set-to-string-tag":126,"../internals/well-known-symbol-define":151}],194:[function(require,module,exports){
+},{"../internals/get-built-in":60,"../internals/set-to-string-tag":126,"../internals/well-known-symbol-define":151}],195:[function(require,module,exports){
 'use strict';
 var global = require('../internals/global');
 var DOMIterables = require('../internals/dom-iterables');
@@ -4672,7 +4710,7 @@ for (var COLLECTION_NAME in DOMIterables) {
 
 handlePrototype(DOMTokenListPrototype);
 
-},{"../internals/array-for-each":8,"../internals/create-non-enumerable-property":25,"../internals/dom-iterables":35,"../internals/dom-token-list-prototype":36,"../internals/global":65}],195:[function(require,module,exports){
+},{"../internals/array-for-each":8,"../internals/create-non-enumerable-property":25,"../internals/dom-iterables":35,"../internals/dom-token-list-prototype":36,"../internals/global":65}],196:[function(require,module,exports){
 'use strict';
 var global = require('../internals/global');
 var DOMIterables = require('../internals/dom-iterables');
@@ -4711,7 +4749,7 @@ for (var COLLECTION_NAME in DOMIterables) {
 
 handlePrototype(DOMTokenListPrototype, 'DOMTokenList');
 
-},{"../internals/create-non-enumerable-property":25,"../internals/dom-iterables":35,"../internals/dom-token-list-prototype":36,"../internals/global":65,"../internals/set-to-string-tag":126,"../internals/well-known-symbol":153,"../modules/es.array.iterator":157}],196:[function(require,module,exports){
+},{"../internals/create-non-enumerable-property":25,"../internals/dom-iterables":35,"../internals/dom-token-list-prototype":36,"../internals/global":65,"../internals/set-to-string-tag":126,"../internals/well-known-symbol":153,"../modules/es.array.iterator":157}],197:[function(require,module,exports){
 (function (process){(function (){
 // 'path' module extracted from Node.js v8.11.1 (only the posix part)
 // transplited with Babel
@@ -5244,7 +5282,7 @@ posix.posix = posix;
 module.exports = posix;
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":197}],197:[function(require,module,exports){
+},{"_process":198}],198:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -5430,7 +5468,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],198:[function(require,module,exports){
+},{}],199:[function(require,module,exports){
 (function (global){(function (){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -6090,10 +6128,9 @@ process.umask = function() { return 0; };
 })));
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],199:[function(require,module,exports){
+},{}],200:[function(require,module,exports){
 "use strict";
 
-require("core-js/modules/es.object.define-property.js");
 require("core-js/modules/es.symbol.js");
 require("core-js/modules/es.symbol.description.js");
 require("core-js/modules/es.symbol.iterator.js");
@@ -6114,6 +6151,8 @@ require("core-js/modules/es.object.set-prototype-of.js");
 require("core-js/modules/es.object.proto.js");
 require("core-js/modules/es.array.reverse.js");
 require("core-js/modules/es.array.slice.js");
+require("core-js/modules/es.string.starts-with.js");
+require("core-js/modules/es.object.define-property.js");
 require("core-js/modules/es.object.to-string.js");
 require("core-js/modules/es.promise.js");
 require("core-js/modules/es.object.keys.js");
@@ -6130,8 +6169,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 Plugins that work with `html-webpack-plugin` can be applied only to one
 transpilation (`main` or `legacy`). The same stands for the manipulation
 with `htmlWebpackPlugin.files.js`. Therefore this is the only solution for now.
-JavaScripts have to be added manually to html in production.
+JavaScripts have to be added manually to html in development.
+DON'T USE IN PRODUCTION.
 */
+// startsWith polyfill for IE11 (whatwg-fetch)
+// https://stackoverflow.com/a/36213464
+if (!String.prototype.startsWith) {
+  Object.defineProperty(String.prototype, 'startsWith', {
+    value: function value(search, rawPos) {
+      var pos = rawPos > 0 ? rawPos | 0 : 0;
+      return this.substring(pos, pos + search.length) === search;
+    }
+  });
+}
 var assetsJsonFile = _abstractionDslConfigDefaults["default"].assetsJsonUrl;
 var appendScript = function appendScript(url, ext) {
   var s = document.createElement('script');
@@ -6210,4 +6260,4 @@ var loadDifferentialScripts = /*#__PURE__*/function () {
 }();
 loadDifferentialScripts();
 
-},{"../.abstraction.dsl.config.defaults.js":1,"core-js/modules/es.array.for-each.js":155,"core-js/modules/es.array.includes.js":156,"core-js/modules/es.array.iterator.js":157,"core-js/modules/es.array.push.js":159,"core-js/modules/es.array.reverse.js":160,"core-js/modules/es.array.slice.js":161,"core-js/modules/es.error.cause.js":162,"core-js/modules/es.error.to-string.js":163,"core-js/modules/es.function.name.js":164,"core-js/modules/es.json.to-string-tag.js":166,"core-js/modules/es.math.to-string-tag.js":167,"core-js/modules/es.object.create.js":169,"core-js/modules/es.object.define-property.js":170,"core-js/modules/es.object.get-prototype-of.js":172,"core-js/modules/es.object.keys.js":173,"core-js/modules/es.object.proto.js":174,"core-js/modules/es.object.set-prototype-of.js":175,"core-js/modules/es.object.to-string.js":176,"core-js/modules/es.promise.js":180,"core-js/modules/es.string.includes.js":184,"core-js/modules/es.string.iterator.js":185,"core-js/modules/es.symbol.async-iterator.js":186,"core-js/modules/es.symbol.description.js":188,"core-js/modules/es.symbol.iterator.js":190,"core-js/modules/es.symbol.js":191,"core-js/modules/es.symbol.to-string-tag.js":193,"core-js/modules/web.dom-collections.for-each.js":194,"core-js/modules/web.dom-collections.iterator.js":195,"whatwg-fetch":198}]},{},[199]);
+},{"../.abstraction.dsl.config.defaults.js":1,"core-js/modules/es.array.for-each.js":155,"core-js/modules/es.array.includes.js":156,"core-js/modules/es.array.iterator.js":157,"core-js/modules/es.array.push.js":159,"core-js/modules/es.array.reverse.js":160,"core-js/modules/es.array.slice.js":161,"core-js/modules/es.error.cause.js":162,"core-js/modules/es.error.to-string.js":163,"core-js/modules/es.function.name.js":164,"core-js/modules/es.json.to-string-tag.js":166,"core-js/modules/es.math.to-string-tag.js":167,"core-js/modules/es.object.create.js":169,"core-js/modules/es.object.define-property.js":170,"core-js/modules/es.object.get-prototype-of.js":172,"core-js/modules/es.object.keys.js":173,"core-js/modules/es.object.proto.js":174,"core-js/modules/es.object.set-prototype-of.js":175,"core-js/modules/es.object.to-string.js":176,"core-js/modules/es.promise.js":180,"core-js/modules/es.string.includes.js":184,"core-js/modules/es.string.iterator.js":185,"core-js/modules/es.string.starts-with.js":186,"core-js/modules/es.symbol.async-iterator.js":187,"core-js/modules/es.symbol.description.js":189,"core-js/modules/es.symbol.iterator.js":191,"core-js/modules/es.symbol.js":192,"core-js/modules/es.symbol.to-string-tag.js":194,"core-js/modules/web.dom-collections.for-each.js":195,"core-js/modules/web.dom-collections.iterator.js":196,"whatwg-fetch":199}]},{},[200]);
