@@ -19,7 +19,7 @@
 > **IMPORTANT: This is only to be used in development!**
 >
 
-Problem: When having two transpilation configs for Webpack (i.e. differential serving: `modern/es6` and `legacy/es5`), webpack plugins being used to load javascript into HTML, together with `html-webpack-plugin`, can be used only with one configuration (either `main` or `legacy`). The same stands for the manipulation with `htmlWebpackPlugin.files.js`. Therefore this seems to be the only solution for now.
+The problem: When having two transpilation configs for Webpack (i.e. differential serving: `modern/es6` and `legacy/es5`), webpack plugins being used to load javascript into HTML, together with `html-webpack-plugin`, can be used only with one configuration (either `main` or `legacy`). The same stands for the manipulation with `htmlWebpackPlugin.files.js`. Therefore this seems to be the only solution for now.
 
 This project is created to work with [abstraction](https://github.com/v1ggs/abstraction), but if you produce a valid `.assets.json` (built with [assets-webpack-plugin](https://www.npmjs.com/package/assets-webpack-plugin), see an example below) and have it running on the same server as the page, it should work with any setup.
 
@@ -37,15 +37,15 @@ This is an example of the `.assets.json` file being used with this setup, that c
 
 ```json
 {
- "index": { // Page
-  "js": "assets/index.es5.js", // nomodule bundle
-  "mjs": "assets/index.mjs" // module bundle
- },
+   "index": { // Page
+      "js": "assets/index.es5.js", // nomodule bundle
+      "mjs": "assets/index.mjs" // module bundle
+   },
 
- "homepage": {  // Page
-  "js": "assets/homepage.es5.js", // nomodule bundle
-  "mjs": "assets/homepage.mjs" // module bundle
- }
+   "homepage": {  // Page
+      "js": "assets/homepage.es5.js", // nomodule bundle
+      "mjs": "assets/homepage.mjs" // module bundle
+   }
 }
 ```
 
