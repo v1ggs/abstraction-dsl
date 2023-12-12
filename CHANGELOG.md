@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.1](https://github.com/v1ggs/abstraction-dsl/compare/1.1.0...1.1.1) (2023-12-12)
+
+
+### Bug Fixes
+
+* add 'startsWith' polyfill for IE11 ([8e2a162](https://github.com/v1ggs/abstraction-dsl/commit/8e2a16234a2ac656b20db7f4a633e5ad03742cce))
+
+
+### Docs
+
+* minor changes ([2609ce1](https://github.com/v1ggs/abstraction-dsl/commit/2609ce1903bfbae5da3c6c2d1eaa6cfbc78d1dda))
+
 ## [1.1.0](https://github.com/v1ggs/abstraction-dsl/compare/1.0.4...1.1.0) (2023-12-06)
 
 
